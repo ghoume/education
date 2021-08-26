@@ -2,12 +2,24 @@
 
 class House:
     """класс дома"""  # Первая строка считается описанием класса/метода. Стандарт PEP8
-    house_size: int
-    house_weight: int
-    
+    house_size: int; house_weight: int  # Локальные атрибуты класса
+    def __init__(self): 
+        """инициализатор класса дома"""
+        print("Класс дома создан")
+
+    def setLocalValues(self, size: int, weight: int): 
+        """даем значения локальным атрибутам класса"""
+        self.house_size = size
+        self.house_weight = weight
+        # только благодаря первому параметру self мы можем «знать» из какого конкретно экземпляра был вызван данный метод: self всегда ссылается на этот экземпляр
+
     def window(size:int, weight:int):
         """окно"""
         return size, weight
+
+    def __del__(self):
+        """финализатор класса"""
+        print("Удаление экземпляра:", self.__str__())
 
 
 def checkAttr(className: object, attrName: str, desc: str = "") -> str:
@@ -32,8 +44,7 @@ print("Имя класса:", House.__name__)
 print("Полный набор данных класса:", dir(House)) 
 
 h = House()
-h.house_size = 100  # Размер дома: атрибут или свойство класса
-h.house_weight = 15  # Ширина дома: атрибут или свойство класса
+h.setLocalValues(size=100, weight=15)
 print("Список локальных переменных:", h.__dict__) 
 
 # Возвращаем значение атрибута
